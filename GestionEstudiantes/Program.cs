@@ -14,6 +14,12 @@ while (!salir)
         case "1":
             CrearEstudiante();
             break;
+        case "2":
+            ListarEstudiantes();
+            break;
+        case "3":
+            BuscarEstudiante();
+            break;
         case "0":
             salir = true;
             break;
@@ -29,6 +35,8 @@ void MostrarMenu()
 {
     Console.WriteLine("==== Gestión de Estudiantes (CRUD) ====");
     Console.WriteLine("1. Crear estudiante");
+    Console.WriteLine("2. Listar estudiantes");
+    Console.WriteLine("3. Buscar estudiante por Id");
     Console.WriteLine("0. Salir");
     Console.Write("Selecciona una opción: ");
 }
@@ -46,4 +54,30 @@ void CrearEstudiante()
 
     var estudiante = service.Crear(nombre, edad, carrera);
     Console.WriteLine($"Estudiante creado con éxito: {estudiante}\n");
+}
+
+void ListarEstudiantes()
+{
+    var lista = service.ListarTodos();
+    if (!lista.Any())
+    {
+        Console.WriteLine("No hay estudiantes registrados.\n");
+        return;
+    }
+
+    Console.WriteLine("-- Lista de estudiantes --");
+    foreach (var e in lista)
+        Console.WriteLine(e);
+    Console.WriteLine();
+}
+
+void BuscarEstudiante()
+{
+    Console.Write("Id a buscar: ");
+    int.TryParse(Console.ReadLine(), out int id);
+
+    var estudiante = service.BuscarPorId(id);
+    Console.WriteLine(estudiante is null
+        ? $"No se encontró un estudiante con Id {id}.\n"
+        : $"Encontrado: {estudiante}\n");
 }
