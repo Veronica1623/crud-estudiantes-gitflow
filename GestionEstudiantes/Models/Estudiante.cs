@@ -10,6 +10,9 @@ public class Estudiante
 
     public override string ToString()
     {
-        return $"[{Id}] {Nombre} | Edad: {Edad} | Carrera: {Carrera} | Registrado: {FechaRegistro}";
+        // FIX: formato de fecha fijo (yyyy-MM-dd), antes dependía de la cultura
+        // del sistema y producía salidas inconsistentes entre entornos.
+        string fecha = FechaRegistro.ToString("yyyy-MM-dd");
+        return $"[{Id}] {Nombre} | Edad: {Edad} | Carrera: {Carrera} | Registrado: {fecha}";
     }
 }
