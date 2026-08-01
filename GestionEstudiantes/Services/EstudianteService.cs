@@ -32,16 +32,28 @@ public class EstudianteService
         return estudiante;
     }
 
-    // READ (listar todos)
     public List<Estudiante> ListarTodos()
     {
         return _estudiantes.OrderBy(e => e.Id).ToList();
     }
 
-    // READ (buscar por id)
     public Estudiante? BuscarPorId(int id)
     {
         return _estudiantes.FirstOrDefault(e => e.Id == id);
+    }
+
+    // UPDATE
+    public bool Actualizar(int id, string? nombre, int? edad, string? carrera)
+    {
+        var estudiante = BuscarPorId(id);
+        if (estudiante is null) return false;
+
+        if (!string.IsNullOrWhiteSpace(nombre)) estudiante.Nombre = nombre;
+        if (edad.HasValue) estudiante.Edad = edad.Value;
+        if (!string.IsNullOrWhiteSpace(carrera)) estudiante.Carrera = carrera;
+
+        Guardar();
+        return true;
     }
 
     private List<Estudiante> CargarDesdeArchivo()
