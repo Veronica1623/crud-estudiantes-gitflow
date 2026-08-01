@@ -16,7 +16,6 @@ public class EstudianteService
         _siguienteId = _estudiantes.Any() ? _estudiantes.Max(e => e.Id) + 1 : 1;
     }
 
-    // CREATE
     public Estudiante Crear(string nombre, int edad, string carrera)
     {
         var estudiante = new Estudiante
@@ -31,6 +30,18 @@ public class EstudianteService
         _estudiantes.Add(estudiante);
         Guardar();
         return estudiante;
+    }
+
+    // READ (listar todos)
+    public List<Estudiante> ListarTodos()
+    {
+        return _estudiantes.OrderBy(e => e.Id).ToList();
+    }
+
+    // READ (buscar por id)
+    public Estudiante? BuscarPorId(int id)
+    {
+        return _estudiantes.FirstOrDefault(e => e.Id == id);
     }
 
     private List<Estudiante> CargarDesdeArchivo()
