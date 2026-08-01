@@ -1,1 +1,5 @@
-Console.WriteLine("Proyecto en construcción. Las funcionalidades se agregarán vía ramas feature/.");
+using GestionEstudiantes.Models;
+using GestionEstudiantes.Services;
+
+Console.WriteLine("==== Gestión de Estudiantes (CRUD) ====");
+Console.WriteLine("(scaffold inicial - funcionalidades vía ramas feature/)");
