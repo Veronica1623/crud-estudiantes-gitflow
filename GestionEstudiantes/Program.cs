@@ -23,6 +23,9 @@ while (!salir)
         case "4":
             ActualizarEstudiante();
             break;
+        case "5":
+            EliminarEstudiante();
+            break;
         case "0":
             salir = true;
             break;
@@ -41,6 +44,7 @@ void MostrarMenu()
     Console.WriteLine("2. Listar estudiantes");
     Console.WriteLine("3. Buscar estudiante por Id");
     Console.WriteLine("4. Actualizar estudiante");
+    Console.WriteLine("5. Eliminar estudiante");
     Console.WriteLine("0. Salir");
     Console.Write("Selecciona una opción: ");
 }
@@ -104,5 +108,16 @@ void ActualizarEstudiante()
     bool actualizado = service.Actualizar(id, nombre, edad, carrera);
     Console.WriteLine(actualizado
         ? "Estudiante actualizado con éxito.\n"
+        : $"No se encontró un estudiante con Id {id}.\n");
+}
+
+void EliminarEstudiante()
+{
+    Console.Write("Id a eliminar: ");
+    int.TryParse(Console.ReadLine(), out int id);
+
+    bool eliminado = service.Eliminar(id);
+    Console.WriteLine(eliminado
+        ? "Estudiante eliminado con éxito.\n"
         : $"No se encontró un estudiante con Id {id}.\n");
 }
