@@ -1,0 +1,8 @@
+bin/
+obj/
+*.user
+estudiantes.json
+.vs/
+.vscode/
+.idea/
+*.swp
