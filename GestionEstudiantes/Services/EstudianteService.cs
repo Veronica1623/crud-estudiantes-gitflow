@@ -42,7 +42,6 @@ public class EstudianteService
         return _estudiantes.FirstOrDefault(e => e.Id == id);
     }
 
-    // UPDATE
     public bool Actualizar(int id, string? nombre, int? edad, string? carrera)
     {
         var estudiante = BuscarPorId(id);
@@ -52,6 +51,17 @@ public class EstudianteService
         if (edad.HasValue) estudiante.Edad = edad.Value;
         if (!string.IsNullOrWhiteSpace(carrera)) estudiante.Carrera = carrera;
 
+        Guardar();
+        return true;
+    }
+
+    // DELETE
+    public bool Eliminar(int id)
+    {
+        var estudiante = BuscarPorId(id);
+        if (estudiante is null) return false;
+
+        _estudiantes.Remove(estudiante);
         Guardar();
         return true;
     }
